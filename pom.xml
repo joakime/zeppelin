@@ -32,7 +32,7 @@
   <parent>
     <groupId>org.apache</groupId>
     <artifactId>apache</artifactId>
-    <version>17</version>
+    <version>24</version> <!-- version 17 contains an invalid repository definition for newer versions of Maven. Failed to read artifact descriptor for org.apache.zeppelin:zeppelin-common:jar:0.10.0-SNAPSHOT: Could not transfer artifact org.apache.zeppelin:zeppelin-common:pom:0.10.0-SNAPSHOT from/to maven-default-http-blocker (http://0.0.0.0/): Blocked mirror for repositories: [apache.snapshots (http://repository.apache.org/snapshots, default, snapshots)] -->
   </parent>
 
   <licenses>
@@ -106,6 +106,11 @@
   </modules>
 
   <properties>
+    <!-- required for reproducible builds. 
+         mandated by the org.apache:apache:24 parent pom enforcer rule.
+         see: https://maven.apache.org/guides/mini/guide-reproducible-builds.html
+    -->
+    <project.build.outputTimestamp>1</project.build.outputTimestamp>
     <!-- language versions -->
     <java.version>1.8</java.version>
     <scala.2.10.version>2.10.5</scala.2.10.version>
